@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Count people in image - less than 5 min</title>
+		
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" item-content="IE=edge,chrome=1">
+        <meta name="description" item-content="">
+		
+		<!--remove if not responsive-->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" >
+
+		<!--facebook meta properties-->
+		<meta property="og:image" content="" />
+		<meta property="og:title" content=""/>
+		<meta property="og:url" content=""/>
+		<meta property="og:site_name" content=""/>
+		<meta property="og:description" content="">
+
+		<link href='http://fonts.googleapis.com/css?family=Hind:400,700' rel='stylesheet' type='text/css'>
+		<style>
+			body,html,input,select{
+				font-family:Hind,sans-serif;
+				line-height:1.5em;
+			}
+			ul,li{
+				margin:0;
+				padding:0;
+			}
+			.page{
+				text-align:center;
+				width:100%;
+			}
+			.image-wrap{
+				border:1px solid #3f3f3f;
+				display:inline-block;
+				list-style:none;
+				margin:20px 1%;
+				min-width:350px;
+				padding:10px;
+				text-align:center;
+				vertical-align:top;
+				width:40%;
+			}
+			.image-wrap img{
+				display:block;
+				margin:1em auto;
+				width:90%;
+			}
+			.image-wrap.full{
+				width:85%;
+			}
+			button{
+				background-color:#46b9a2;
+				border:0;
+				color:white;
+				font-weight:bold;
+				margin:10px auto;
+				padding:10px 20px;
+				text-transform:uppercase;
+				width:150px;
+			}
+			button:hover{
+				cursor:pointer;
+			}
+			.question{
+				padding:0;
+				margin:0;
+				text-align:left;
+			}
+			.question li{
+				list-style:none;
+				margin:10px 15px;
+			}
+			.question input{
+				width:50px;
+			}
+			.instruction{
+				text-align:center;
+				margin:1em auto;
+				padding:.5em 20px;
+				border-bottom:1px solid #373737;
+				width:800px;
+			}
+			.instruction img{
+				width:100%;
+			}
+			.pointable{
+				position:relative;
+			}
+			.point{
+				position:absolute;
+				width:10px;
+				height:10px;
+				border-radius:100%;
+				background-color:red;
+			}
+			.point:hover{
+				cursor:pointer;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	</head>
+	<body>
+		<!--remove if this supports IE7 and below-->
+		<!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+		<div class="instruction">
+			<p>In this task, we're asking you to indicate how many people are in a picture. For example, in the picture below:</p>
+			<img src="example.jpg" />
+			<p>there are 8 people, and in the picture below:</p>
+			<img src="example2.jpg" />
+			<p>there is 1.</p>
+			<p>Each picture will also have a yes/no question related to the picture. Please answer the question according to what you observe.</p>
+		</div>
+		<div class="page">
+			<form type="GET">
+			<ul>
+				<li class="image-wrap">
+					<div class="pointable" id="pointable-1">
+						<img src="people1.jpg" alt="people 1" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_1" id="amount-1" />
+							<a href="#_" class="count-point" data-source="pointable-1" data-target="amount-1">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_1">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_1">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap">
+					<div class="pointable" id="pointable-3">
+						<img src="people3.jpg" alt="people 3" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_3" id="amount-3" />
+							<a href="#_" class="count-point" data-source="pointable-3" data-target="amount-3">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_3">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_3">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap">
+					<div class="pointable" id="pointable-4">
+						<img src="people4.jpg" alt="people 4" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_4" id="amount-4" />
+							<a href="#_" class="count-point" data-source="pointable-4" data-target="amount-4">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_4">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_4">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap">
+					<div class="pointable" id="pointable-5">
+						<img src="people5.png" alt="people 5" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_5" id="amount-5" />
+							<a href="#_" class="count-point" data-source="pointable-5" data-target="amount-5">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_5">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_5">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap">
+					<div class="pointable" id="pointable-2">
+						<img src="people2.jpg" alt="people 2" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_2" id="amount-2" />
+							<a href="#_" class="count-point" data-source="pointable-2" data-target="amount-2">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_2">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_2">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap">
+					<div class="pointable" id="pointable-7">
+						<img src="bangtan.jpg" alt="bangtan" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_7" id="amount-7" />
+							<a href="#_" class="count-point" data-source="pointable-7" data-target="amount-7">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_7">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_7">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap full">
+					<div class="pointable" id="pointable-6">
+						<img src="people6.jpg" alt="people 6" id="pointable-6" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_1" id="amount-6" />
+							<a href="#_" class="count-point" data-source="pointable-6" data-target="amount-6">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_6">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_6">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<button type="submit">Submit</button>
+			</form>
+		</div>
+		<script>
+			$(".pointable img").click(function(e){
+				var _this = $(this).parent();
+				var posX = e.pageX - _this.offset().left - 5;
+				var posY = e.pageY - _this.offset().top - 5;
+				_this.append("<div class='point' onclick='remove()' style='top:"+posY+"px;left:"+posX+"px;'></div>");
+			})
+			function remove(){
+				$(this).remove();
+			}
+			$(".count-point").click(function(e){
+				e.preventDefault();
+				var src = $(this).data("source");
+				var target = $(this).data("target");
+				$("#"+target).val($("#"+src).find(".point").length);
+			})
+		</script>
+	</body>
+</html>
