@@ -308,8 +308,7 @@
 			<button type="submit">Submit</button>
 			</form>
 		</div>
-		<script type="text/javascript" src="mturk.js" />
-		<script>
+		<script type="text/javascript">
 			$(".pointable img").click(function(e){
 				var _this = $(this).parent();
 				var posX = e.pageX - _this.offset().left - 5;
@@ -326,5 +325,6 @@
 				$("#"+target).val($("#"+src).find(".point").length);
 			})
 		</script>
+		<script type="text/javascript" src="mturk.js" />
 	</body>
 </html>
