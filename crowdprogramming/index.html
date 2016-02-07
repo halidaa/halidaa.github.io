@@ -108,61 +108,40 @@
         <![endif]-->
 		<div class="instruction">
 			<p>In this task, we're asking you to indicate how many people are in a picture. For example, in the picture below:</p>
-			<img src="example.jpg" />
-			<p>there are 8 people, and in the picture below:</p>
-			<img src="example2.jpg" />
-			<p>there is 1.</p>
-			<p>Each picture will also have a yes/no question related to the picture. Please answer the question according to what you observe.</p>
+			<div class="pointable" id="sample-1">
+				<img src="example.jpg" />
+			</div>
+			<p>there are 8 people (<i>don't miss that guy behind the tree</i>), and in the picture below:</p>
+			<div class="pointable" id="sample-2">
+				<img src="example2.jpg" />
+			</div>
+			<p>there is 1 (<i>horses are not people</i>).</p>
+			<p>To help with your counting, you can click on the picture to add a red point to mark the people you have counted. To remove the markers, simply click on the point you want to remove. Go ahead, try it out on the pictures above!</p>
+			<p>Once you've marked everyone on the picture, click on "use point count" to count the amount of markers you've put on the picture. Each picture will also have a yes/no question related to the picture. Please answer the question according to what you observe. Good luck!</p>
 		</div>
 		<div class="page">
-			<form type="GET">
+			<form id="mturk_form">
 			<ul>
 				<li class="image-wrap">
-					<div class="pointable" id="pointable-1">
-						<img src="people1.jpg" alt="people 1" />
+					<div class="pointable" id="pointable-5">
+						<img src="people5.png" alt="people 5" />
 					</div>
 					<ul class="question">
 						<li>
 							How many people are in the picture?
-							<input type="text" name="amount_1" id="amount-1" />
-							<a href="#_" class="count-point" data-source="pointable-1" data-target="amount-1">use point count</a>
+							<input type="text" name="amount_5" id="amount-5" />
+							<a href="#_" class="count-point" data-source="pointable-5" data-target="amount-5">use point count</a>
 						</li>
 						<li>
 							Is it a black and white photo?
-							<select name="yesno_1">
+							<select name="yesno_5">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 						<li>
 							Is the photo taken indoor?
-							<select name="yesno2_1">
-								<option>Yes</option>
-								<option>No</option>
-							</select>
-						</li>
-					</ul>
-				</li>
-				<li class="image-wrap">
-					<div class="pointable" id="pointable-3">
-						<img src="people3.jpg" alt="people 3" />
-					</div>
-					<ul class="question">
-						<li>
-							How many people are in the picture?
-							<input type="text" name="amount_3" id="amount-3" />
-							<a href="#_" class="count-point" data-source="pointable-3" data-target="amount-3">use point count</a>
-						</li>
-						<li>
-							Is it a black and white photo?
-							<select name="yesno_3">
-								<option>Yes</option>
-								<option>No</option>
-							</select>
-						</li>
-						<li>
-							Is the photo taken indoor?
-							<select name="yesno2_3">
+							<select name="yesno2_5">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
@@ -196,32 +175,6 @@
 					</ul>
 				</li>
 				<li class="image-wrap">
-					<div class="pointable" id="pointable-5">
-						<img src="people5.png" alt="people 5" />
-					</div>
-					<ul class="question">
-						<li>
-							How many people are in the picture?
-							<input type="text" name="amount_5" id="amount-5" />
-							<a href="#_" class="count-point" data-source="pointable-5" data-target="amount-5">use point count</a>
-						</li>
-						<li>
-							Is it a black and white photo?
-							<select name="yesno_5">
-								<option>Yes</option>
-								<option>No</option>
-							</select>
-						</li>
-						<li>
-							Is the photo taken indoor?
-							<select name="yesno2_5">
-								<option>Yes</option>
-								<option>No</option>
-							</select>
-						</li>
-					</ul>
-				</li>
-				<li class="image-wrap">
 					<div class="pointable" id="pointable-2">
 						<img src="people2.jpg" alt="people 2" />
 					</div>
@@ -248,8 +201,60 @@
 					</ul>
 				</li>
 				<li class="image-wrap">
+					<div class="pointable" id="pointable-3">
+						<img src="people3.jpg" alt="people 3" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_3" id="amount-3" />
+							<a href="#_" class="count-point" data-source="pointable-3" data-target="amount-3">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_3">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_3">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap">
+					<div class="pointable" id="pointable-1">
+						<img src="people1.jpg" alt="people 1" />
+					</div>
+					<ul class="question">
+						<li>
+							How many people are in the picture?
+							<input type="text" name="amount_1" id="amount-1" />
+							<a href="#_" class="count-point" data-source="pointable-1" data-target="amount-1">use point count</a>
+						</li>
+						<li>
+							Is it a black and white photo?
+							<select name="yesno_1">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+						<li>
+							Is the photo taken indoor?
+							<select name="yesno2_1">
+								<option>Yes</option>
+								<option>No</option>
+							</select>
+						</li>
+					</ul>
+				</li>
+				<li class="image-wrap">
 					<div class="pointable" id="pointable-7">
-						<img src="bangtan.jpg" alt="bangtan" />
+						<img src="people-7.jpg" alt="people-7" />
 					</div>
 					<ul class="question">
 						<li>
@@ -303,6 +308,7 @@
 			<button type="submit">Submit</button>
 			</form>
 		</div>
+		<script type="text/javascript" src="mturk.js" />
 		<script>
 			$(".pointable img").click(function(e){
 				var _this = $(this).parent();
