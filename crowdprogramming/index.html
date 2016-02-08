@@ -33,42 +33,46 @@
 			}
 			.image-wrap{
 				border:1px solid #3f3f3f;
-				display:inline-block;
+				display:none;
 				list-style:none;
 				margin:20px 1%;
 				min-width:350px;
 				padding:10px;
 				text-align:center;
 				vertical-align:top;
-				width:500px;
+				width:750px;
 			}
 			.image-wrap img{
 				display:block;
 				margin:1em auto;
 				width:90%;
 			}
-			.image-wrap.full{
-				width:1000px;
-			}
-			.submit-button{
+			.button{
 				background-color:#009688;
 				border:0;
 				color:white;
+				display:inline-block;
 				font-weight:bold;
-				margin:10px auto;
-				padding:10px 20px;
+				margin:10px 20px;
+				padding:0;
 				text-transform:uppercase;
+				line-height:44px;
+				height:44px;
 				width:150px;
 			}
-			.submit-button:hover{
+			.button:hover{
 				background-color:#00BFA5;
 				cursor:pointer;
 			}
-			.submit-button[disabled="disabled"]{
+			.button[disabled="disabled"]{
 				background-color:#afafaf;
 			}
-			.submit-button[disabled="disabled"]{
+			.button[disabled="disabled"]{
 				cursor:default;
+			}
+			.error{
+				display:none;
+				color:#D32F2F;
 			}
 			.question{
 				padding:0;
@@ -89,7 +93,7 @@
 				width:80%;
 				min-width:300px;
 			}
-			.instruction h2{
+			h2{
 				color:white;
 				background-color:#00BFA5;
 				border-bottom:1px solid #009688;
@@ -150,13 +154,16 @@
 							<a href="#_" class="count-point" data-source="pointable-5" data-target="amount-5">use point count</a>
 						</li>
 						<li>
-							Is it a black and white photo?
+							Is there a woman in the picture?
 							<select name="yesno_5">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 					</ul>
+					<div class="button" disabled="disabled">Prev</div>
+					1/7
+					<div class="button" onclick="next()" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-4">
@@ -169,13 +176,16 @@
 							<a href="#_" class="count-point" data-source="pointable-4" data-target="amount-4">use point count</a>
 						</li>
 						<li>
-							Is it a black and white photo?
+							Is there a woman in the picture?
 							<select name="yesno_4">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 					</ul>
+					<div class="button" onclick="prev()" >Prev</div>
+					2/7
+					<div class="button" onclick="next()" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-2">
@@ -188,13 +198,16 @@
 							<a href="#_" class="count-point" data-source="pointable-2" data-target="amount-2">use point count</a>
 						</li>
 						<li>
-							Is it a black and white photo?
+							Is there a woman in the picture?
 							<select name="yesno_2">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 					</ul>
+					<div class="button" onclick="prev()" >Prev</div>
+					3/7
+					<div class="button" onclick="next()" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-3">
@@ -207,13 +220,16 @@
 							<a href="#_" class="count-point" data-source="pointable-3" data-target="amount-3">use point count</a>
 						</li>
 						<li>
-							Is it a black and white photo?
+							Is there a woman in the picture?
 							<select name="yesno_3">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 					</ul>
+					<div class="button" onclick="prev()" >Prev</div>
+					4/7
+					<div class="button" onclick="next()" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-1">
@@ -226,13 +242,16 @@
 							<a href="#_" class="count-point" data-source="pointable-1" data-target="amount-1">use point count</a>
 						</li>
 						<li>
-							Is it a black and white photo?
+							Is there a woman in the picture?
 							<select name="yesno_1">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 					</ul>
+					<div class="button" onclick="prev()" >Prev</div>
+					5/7
+					<div class="button" onclick="next()" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-7">
@@ -245,13 +264,16 @@
 							<a href="#_" class="count-point" data-source="pointable-7" data-target="amount-7">use point count</a>
 						</li>
 						<li>
-							Is it a black and white photo?
+							Is there a woman in the picture?
 							<select name="yesno_7">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 					</ul>
+					<div class="button" onclick="prev()" >Prev</div>
+					6/7
+					<div class="button" onclick="next()" >Next</div>
 				</li>
 				<li class="image-wrap full">
 					<div class="pointable" id="pointable-6">
@@ -264,19 +286,23 @@
 							<a href="#_" class="count-point" data-source="pointable-6" data-target="amount-6">use point count</a>
 						</li>
 						<li>
-							Is it a black and white photo?
+							Is there a woman in the picture?
 							<select name="yesno_6">
 								<option>Yes</option>
 								<option>No</option>
 							</select>
 						</li>
 					</ul>
+					<div class="error">Please answer all questions before submitting.</div>
+					<div class="button" onclick="prev()" >Prev</div>
+					7/7
+					<input class="button" type="submit" value="Submit" id="submit-button" />
 				</li>
 			</ul>
-			<input class="submit-button" type="submit" value="Submit"/>
 			</form>
 		</div>
 		<script type="text/javascript">
+			var position = 0;
 			$(".pointable img").click(function(e){
 				var _this = $(this).parent();
 				var posX = e.pageX - _this.offset().left - 5;
@@ -291,6 +317,35 @@
 				var src = $(this).data("source");
 				var target = $(this).data("target");
 				$("#"+target).val($("#"+src).find(".point").length);
+			})
+			$(".image-wrap").eq(position).css("display","inline-block")
+			function prev(){
+				$(".error").hide();
+				if($(this).attr("disabled") == "disabled") return;
+				else{
+					$(".image-wrap").eq(position).css("display","none");
+					position -=1;
+					$(".image-wrap").eq(position).css("display","inline-block");
+				}
+			}
+			function next(){
+				if($(this).attr("disabled") == "disabled") return;
+				else{
+					$(".image-wrap").eq(position).css("display","none");
+					position +=1;
+					$(".image-wrap").eq(position).css("display","inline-block");
+				}
+			}
+			$("#submit-button").click(function(e){
+				e.preventDefault();
+				var canSubmit = true;
+				$('input').each(function(){
+					if($(this).val() == ""){
+						canSubmit = false;
+						$(".error").show();
+					}
+				})
+				if(canSubmit) $("#mturk_form").submit();
 			})
 		</script>
 		<script type="text/javascript" src="mturk.js"></script>
