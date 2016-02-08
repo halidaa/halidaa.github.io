@@ -40,7 +40,7 @@
 				padding:10px;
 				text-align:center;
 				vertical-align:top;
-				width:40%;
+				width:500px;
 			}
 			.image-wrap img{
 				display:block;
@@ -48,10 +48,10 @@
 				width:90%;
 			}
 			.image-wrap.full{
-				width:85%;
+				width:1000px;
 			}
 			.submit-button{
-				background-color:#46b9a2;
+				background-color:#009688;
 				border:0;
 				color:white;
 				font-weight:bold;
@@ -61,7 +61,14 @@
 				width:150px;
 			}
 			.submit-button:hover{
+				background-color:#00BFA5;
 				cursor:pointer;
+			}
+			.submit-button[disabled="disabled"]{
+				background-color:#afafaf;
+			}
+			.submit-button[disabled="disabled"]{
+				cursor:default;
 			}
 			.question{
 				padding:0;
@@ -76,14 +83,21 @@
 				width:50px;
 			}
 			.instruction{
-				text-align:center;
 				margin:1em auto;
 				padding:.5em 20px;
-				border-bottom:1px solid #373737;
-				width:800px;
+				border-bottom:1px solid #009688;
+				width:80%;
+				min-width:300px;
+			}
+			.instruction h2{
+				color:white;
+				background-color:#00BFA5;
+				border-bottom:1px solid #009688;
+				padding:10px;
+				margin:-.5em -20px .5em;
 			}
 			.instruction img{
-				width:100%;
+				width:60%;
 			}
 			.pointable{
 				position:relative;
@@ -107,6 +121,8 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 		<div class="instruction">
+			<h2>Instruction</h2>
+			<p><i>Make sure you accept the HIT before starting your work.</i></p>
 			<p>In this task, we're asking you to indicate how many people are in a picture. For example, in the picture below:</p>
 			<div class="pointable" id="sample-1">
 				<img src="example.jpg" />
@@ -118,7 +134,7 @@
 			<p>there is 1 (<i>horses are not people</i>).</p>
 			<p>To help with your counting, you can click on the picture to add a red point to mark the people you have counted. To remove the markers, simply click on the point you want to remove. Go ahead, try it out on the pictures above!</p>
 			<p>Once you've marked everyone on the picture, click on "use point count" to count the amount of markers you've put on the picture. Each picture will also have a yes/no question related to the picture. Please answer the question according to what you observe.</p>
-			<p><b>BONUS:</b> up to $1.50 bonuses will be provided for turkers who get the closest to average number on the last picture.</p>
+			<p><b>BONUS:</b> up to $1.00 bonus will be provided for turkers who get the closest to the average answers for the last picture.</p>
 		</div>
 		<div class="page">
 			<form id="mturk_form">
