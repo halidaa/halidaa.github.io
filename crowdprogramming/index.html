@@ -161,9 +161,9 @@
 							</select>
 						</li>
 					</ul>
-					<div class="button" disabled="disabled">Prev</div>
+					<div class="button" disabled="disabled" onclick="prev(this)">Prev</div>
 					1/7
-					<div class="button" onclick="next()" >Next</div>
+					<div class="button" onclick="next(this)" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-4">
@@ -183,9 +183,9 @@
 							</select>
 						</li>
 					</ul>
-					<div class="button" onclick="prev()" >Prev</div>
+					<div class="button" onclick="prev(this)" >Prev</div>
 					2/7
-					<div class="button" onclick="next()" >Next</div>
+					<div class="button" onclick="next(this)" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-2">
@@ -205,9 +205,9 @@
 							</select>
 						</li>
 					</ul>
-					<div class="button" onclick="prev()" >Prev</div>
+					<div class="button" onclick="prev(this)" >Prev</div>
 					3/7
-					<div class="button" onclick="next()" >Next</div>
+					<div class="button" onclick="next(this)" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-3">
@@ -227,9 +227,9 @@
 							</select>
 						</li>
 					</ul>
-					<div class="button" onclick="prev()" >Prev</div>
+					<div class="button" onclick="prev(this)" >Prev</div>
 					4/7
-					<div class="button" onclick="next()" >Next</div>
+					<div class="button" onclick="next(this)" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-1">
@@ -249,9 +249,9 @@
 							</select>
 						</li>
 					</ul>
-					<div class="button" onclick="prev()" >Prev</div>
+					<div class="button" onclick="prev(this)" >Prev</div>
 					5/7
-					<div class="button" onclick="next()" >Next</div>
+					<div class="button" onclick="next(this)" >Next</div>
 				</li>
 				<li class="image-wrap">
 					<div class="pointable" id="pointable-7">
@@ -271,9 +271,9 @@
 							</select>
 						</li>
 					</ul>
-					<div class="button" onclick="prev()" >Prev</div>
+					<div class="button" onclick="prev(this)" >Prev</div>
 					6/7
-					<div class="button" onclick="next()" >Next</div>
+					<div class="button" onclick="next(this)" >Next</div>
 				</li>
 				<li class="image-wrap full">
 					<div class="pointable" id="pointable-6">
@@ -294,7 +294,7 @@
 						</li>
 					</ul>
 					<div class="error">Please answer all questions before submitting.</div>
-					<div class="button" onclick="prev()" >Prev</div>
+					<div class="button" onclick="prev(this)" >Prev</div>
 					7/7
 					<input class="button" type="submit" value="Submit" id="submit-button" />
 				</li>
@@ -319,17 +319,17 @@
 				$("#"+target).val($("#"+src).find(".point").length);
 			})
 			$(".image-wrap").eq(position).css("display","inline-block")
-			function prev(){
+			function prev(_this){
 				$(".error").hide();
-				if($(this).attr("disabled") == "disabled") return;
+				if($(_this).attr("DISABLED") == "disabled") return;
 				else{
 					$(".image-wrap").eq(position).css("display","none");
 					position -=1;
 					$(".image-wrap").eq(position).css("display","inline-block");
 				}
 			}
-			function next(){
-				if($(this).attr("disabled") == "disabled") return;
+			function next(_this){
+				if($(_this).attr("DISABLED") == "disabled") return;
 				else{
 					$(".image-wrap").eq(position).css("display","none");
 					position +=1;
