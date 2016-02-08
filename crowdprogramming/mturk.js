@@ -30,7 +30,7 @@ $(document).ready(function () {
 
     // If the HIT hasn't been accepted yet, disabled the form fields.
     if(aid == "ASSIGNMENT_ID_NOT_AVAILABLE") {
-	    $('input,textarea,select').attr("DISABLED", "disabled");
+	    $('input,textarea,select,.button').attr("DISABLED", "disabled");
     }
 
     // Add a new hidden input element with name="assignmentId" that
