@@ -1,0 +1,182 @@
+/*style.css*/
+
+html,body{
+	background-color:#FCFCFC;
+	font-family:'McLaren', sans-serif;
+}
+h1,h2,h3{
+	color:#DA4453;
+}
+h1{
+	text-transform:uppercase;
+	font-weight:bold;
+	text-align:center;
+	margin:20px 0 0;
+}
+.page{
+	padding:20px 10%;
+}
+p.monster{
+	display:none;
+}
+.characters{
+	list-style:none;
+	text-align:center;
+}
+.characters li{
+	background:url(avatars.png);
+	display:inline-block;
+	margin:10px;
+	height:150px;
+	vertical-align:middle;
+	width:150px;
+}
+.characters li:hover, .characters li.selected{
+	border:3px solid #DA4453;
+	margin:4.5px;
+	cursor:pointer;
+}
+.characters.kid li{
+	background-position-y:0;
+}
+.characters.monster li{
+	background-position-y:-150px;
+}
+.characters li.char-1{
+	background-position-x:0;
+}
+.characters li.char-2{
+	background-position-x:-150px;
+}
+.characters li.char-3{
+	background-position-x:-300px;
+}
+.characters li.char-4{
+	background-position-x:-450px;
+}
+#player{
+	background-image:url(avatars_mini.png);
+	position:absolute;
+	bottom:0;
+	left:200px;
+	height:100px;
+	width:100px;
+}
+#game{
+	text-align:center;
+	display:none;
+}
+.board{
+	position:relative;
+	display:inline-block;
+	border:3px solid #8CC152;
+	border-radius:5px;
+	vertical-align:top;
+	overflow:hidden;
+}
+.board .row span{
+	background-color:#A0D468;
+	float:left;
+	height:100px;
+	width:100px;
+}
+.board .row:after{
+	clear:both;
+	content:' ';
+	display:table;
+}
+.board .char{
+	background-image:url(avatars_mini.png);
+}
+.monster .char, #player.monster{
+	background-position-y:-100px;
+}
+.kid .char, #player.kid{
+	background-position-y:0;
+}
+.board .char-1{
+	background-position-x:0;
+}
+.board .char-2{
+	background-position-x:-100px;
+}
+.board .char-3{
+	background-position-x:-200px;
+}
+.board .char-4{
+	background-position-x:-300px;
+}
+.credits{
+	font-size:.8em;
+	margin:0;
+	text-align:center;
+}
+.credits a{
+	color:#DA4453;
+	padding-bottom:3px;
+	border-bottom:1px solid #DA4453;
+	text-decoration:none;
+}
+.credits a:hover{
+	padding:0;
+}
+.score{
+	display:inline-block;
+	margin-left:3em;
+	vertical-align:top;
+	text-align:left;
+}
+#bonus{
+	font-weight:bold;
+	font-size:2em;
+	text-align:right;
+	background-color:#fcfcfc;
+	border:3px solid #DA4453;
+	border-radius:5px;
+	margin-bottom:3em;
+	position:relative;
+	padding:10px 5px;
+	width:150px;
+}
+#bonus:before{
+	content:'$';
+	position:absolute;
+	top:0;
+	bottom:0;
+	margin:auto;
+	left:10px;
+	font-size:1.45em;
+}
+.button{
+	border:0px solid transparent;
+	border-right-width:5px;
+	border-bottom-width:5px;
+	border-radius:5px;
+	color:white;
+	margin:10px 20px;
+	width:200px;
+	padding:15px;
+	font-family:'Luckiest Guy', 'McLaren', sans-serif;
+	font-weight:normal;
+	font-size:1.5em;
+	vertical-align:top;
+	text-align:center;
+}
+.button:hover{
+	cursor:pointer;
+	border-top-width:3px;
+	border-left-width:3px;
+	border-right-width:2px;
+	border-bottom-width:2px;
+}
+.button.green-btn{
+	background-color:#A0D468;
+	border-color:#8CC152;
+}
+.button.orange-btn{
+	background-color:#FC6E51;
+	border-color:#E9573F;
+}
+.quit-button{
+	margin:0;
+}
