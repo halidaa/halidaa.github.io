@@ -10,7 +10,7 @@
 		<h1>crowdplaying</h1>
 		<div class="page" id="intro">
 			<h2>Instruction</h2>
-			<p class="monster">You will be playing a game as a monster chasing kids. Your goal is to catch as many kids as possible. For every kid you catch, you will get $0.002 bonus. You can only move sideways in the game. Use the right and left arrows on your keyboard to move your character. The game ends when you collect a total of $1.50 bonus. You can also leave the game any time by clicking the quit button.</p>
+			<p class="monster">You will be playing a game as a monster chasing kids. Your goal is to catch as many kids as possible. For every kid you catch, you will get $0.001 bonus. You can only move sideways in the game. Use the right and left arrows on your keyboard to move your character. The game ends when you collect a total of $1.00 bonus. You can also leave the game any time by clicking the quit button.</p>
 			<p class="kid">You will be playing a game as a kid avoiding monsters. Move your character left and right using the arrow keyboards to avoid incoming monsters. For every second you stay alive, you will get $0.001 bonus. The game ends when you either collect a total of $2.00 bonus, or get caught by a monster. You can also leave the game any time by clicking the quit button.</p>
 			<h2>Choose Your Character</h2>
 			<ul class="characters kid">
@@ -19,7 +19,8 @@
 				<li class="char-3"></li>
 				<li class="char-4"></li>
 			</ul>
-			<p style="text-align:center;"><button class="button orange-btn mode-btn">Change Mode</button><button class="button green-btn start-btn" data-target="game">Begin</button></p>
+			<p><b>IMPORTANT!</b> Accept the HIT before starting your game.</p>
+			<p style="margin-bottom:0;text-align:center;"><button class="button orange-btn mode-btn">Change Mode</button><button class="button green-btn start-btn" data-target="game">Begin</button></p>
 		</div>
 		<div class="page" id="game">
 			<div class="board monster">
@@ -33,153 +34,19 @@
 		</div>
 		<div class="page" id="quit">
 			<h2>Game Over!</h2>
-			<div class="exit-statement">Thank you for playing! Your final earning is <span class="bonus"></span> bonus in addition to your $0.05 payment.</div>
+			<div class="exit-statement">Thank you for playing! Your final earning is <span class="bonus"></span> bonus in addition to your $0.25 payment.</div>
 		</div>
 		<div class="page">
 			<form id="mturk_form">
 				<input type="hidden" id="bonus-input" name="bonus" />
-				<input type="hidden" id="offset-input" name="interactiontime" />
+				<input type="hidden" id="offset-input" name="gametime" />
 				<input type="hidden" id="idle-input" name="idle" />
+				<input type="hidden" id="interaction-input" name="interaction" />
+				<input type="hidden" id="same-input" name="same" />
 			</form>
 		</div>
-		<p class="credits"><a href='http://www.freepik.com/free-vector/young-people-avatars_764471.htm'>Kids</a> and <a href='www.freepik.com/free-vector/funny-monsters-avatars_764473.htm'>Monsters</a> avatars from Freepik.</p>
-		<script>
-			function setRow(row, random){
-				$(".board").prepend("<div class='row'><span></span><span></span><span></span><span></span><span></span></div>");
-				if(random){
-				}
-				for (var j = 0; j < boardHeight; j++){
-					var charID = Math.floor((Math.random() * 4) + 1);
-					if(board[row][j] > 0){
-						$(".board .row").eq(0).find("span").eq(j).addClass("char char-"+charID);
-					}
-				}
-			}
-			
-			function checkCollide(){
-				var posX = parseInt($("#player").css("left"))/100;
-				var xState = $(".board .row").eq(boardHeight-1).find("span").eq(posX).hasClass("char");
-				return xState;
-			}
-			
-			function endGame(){
-				isAlive = false;
-				clearInterval(gameInterval);
-				$("#bonus-input").val(counterIntuitiveBonusVariableJustForCheckingPurposes.toFixed(3));
-				$("#offset-input").val(offset);
-				$("#idle-input").val(idle);
-				$("#game").fadeOut();
-				$("#quit").fadeIn(400, function(){
-					setTimeout(function(){
-						$("#mturk_form").submit();
-					},3000);
-				});
-			}
-			
-			/*game setup*/
-			var isAlive = false;
-			var randomize = false;
-			var offset = 0;
-			var mode = 0;
-			var idle = 0;
-			var board = [[0,0,1,0,0],
-					   [0,0,0,0,0],
-					   [0,0,0,1,1],
-					   [0,0,0,0,0],
-					   [1,1,1,0,0],
-					   [0,0,0,0,0],
-					   [0,0,0,0,0]];
-			var boardHeight = 5;
-			var boardWidth = 5;
-			var bonus = 0.000;
-			var counterIntuitiveBonusVariableJustForCheckingPurposes = 0.000;
-			
-			for (var i = board.length-1; i >= board.length - boardHeight; i--){
-				setRow(i, false);
-			}
-			var gameInterval = setInterval(function(){
-				if(isAlive){
-					$(".board").children(".row").last().remove();
-					var nextRow = board.length - boardHeight - offset%board.length;
-					if (nextRow < 0) nextRow += board.length;
-					setRow(nextRow,randomize);
-					offset++;
-					idle++;
-					if (mode == 0){
-						if (checkCollide()){
-							$("#player").addClass("die");
-							endGame();
-						}
-						else{
-							bonus+= 0.001;
-							counterIntuitiveBonusVariableJustForCheckingPurposes+= 0.001;
-							if(bonus >= 2){
-								$("#player").addClass("win");
-								endGame();
-							}
-						}
-					}
-					else{
-						if(checkCollide()){
-							$("#player").addClass("nyam");
-							bonus+= 0.002;
-							counterIntuitiveBonusVariableJustForCheckingPurposes+= 0.002;
-							
-							if(bonus >= 1.5){
-								$("#player").addClass("win");
-								endGame();
-							}
-						}
-					}
-					$(".bonus").text(bonus.toFixed(3));
-				}
-			},1000)
-			
-			/*event handlers*/
-			$(".characters li").click(function(){
-				var character = $(this).attr("class");
-				var type = $(this).parent().attr("class").split(" ")[1];
-				$(".characters li").removeClass("selected");
-				$(this).addClass("selected");
-				$("#player").removeClass().addClass(character+" "+type);
-			})
-			$(document).keydown(function(e) {
-				if(!isAlive) return;
-				idle = 0;
-				var position = parseInt($("#player").css("left"));
-				if(e.keyCode==37) {
-					position-=100;
-				} else if(e.keyCode == 39) {
-					position+=100;
-				}
-				if(position < 0) position = 400;
-				if(position > ((boardWidth - 1)*100)) position = 0;
-				$("#player").css("left",position+"px");
-			});
-			$(".mode-btn").click(function(){
-				mode = (mode+1)%2;
-				if (mode == 0){
-					$("#intro p.kid").show();
-					$("#intro p.monster").hide();
-					$(".board").removeClass("kid").addClass("monster");
-					$(".characters,#player").removeClass("monster").addClass("kid");
-				}
-				else{
-					$("#intro p.kid").hide();
-					$("#intro p.monster").show();
-					$(".characters,#player").removeClass("kid").addClass("monster");
-					$(".board").removeClass("monster").addClass("kid");
-				}
-			})
-			$(".start-btn").click(function(){
-				$("#intro").fadeOut();
-				$("#game").fadeIn(400,function(){
-					isAlive = true;
-				});
-			})
-			$(".quit-btn").click(function(){
-				endGame();
-			})
-		</script>
+		<p class="credits"><a href='http://www.freepik.com/free-vector/young-people-avatars_764471.htm'>Kids</a> and <a href='www.freepik.com/free-vector/funny-monsters-avatars_764473.htm'>Monsters</a> avatars from Freepik</p>
+		<script type="text/javascript" src="mturk.js"></script>
+		<script type="text/javascript" src="game.js"></script>
 	</body>
 </html>
