@@ -122,9 +122,9 @@ $(document).keydown(function(e) {
 	if(position < 0) position = 400;
 	if(position > ((boardWidth - 1)*100)) position = 0;
 	$("#player").css("left",position+"px");
-	if(mode == 1){
+	/*if(mode == 1){
 		if(checkCollide()) eatKid();
-	}
+	}*/
 	interaction++;
 });
 $(".characters li").click(function(){
