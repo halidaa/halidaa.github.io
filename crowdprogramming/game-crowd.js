@@ -8,6 +8,16 @@ var board = [[0,0,1,0,0,0,1,0],
 		   [0,0,0,0,0,0,0,1],
 		   [1,1,1,0,0,0,0,0],
 		   [0,0,0,0,0,0,0,1],
+		   [0,0,0,0,0,1,0,0],
+		   [0,0,0,0,0,0,0,0],
+		   [0,0,0,0,0,0,1,1],
+		   [0,0,1,0,0,0,1,0],
+		   [1,1,0,0,0,0,0,0],
+		   [0,0,1,0,0,1,0,0],
+		   [0,1,0,1,0,0,0,0],
+		   [0,0,1,0,0,0,1,0],
+		   [0,0,0,0,0,0,0,0],
+		   [0,0,1,0,0,1,0,0],
 		   [0,0,0,0,0,0,1,0]];
 var boardHeight = 5;
 var boardWidth = 5;
@@ -16,13 +26,13 @@ var bonus = 0.000;
 var thisIsTheActualBonusValue = 0.000;
 var isAlive = false;
 var randomize = true;
-var miliseconds = new Date().getTime();
 var gameStart = new Date().getTime();
-var offset = Math.floor(miliseconds/1000)%board.length;
+var offset = 0;
 var mode = 0;
 var idle = 0;
 var maxIdle = 0;
 var interaction = 0;
+var reputation = 0;
 var gameInterval;
 var position = 0;
 var _data = [];
@@ -62,6 +72,7 @@ function eatKid(){
 }
 
 function endGame(){
+	var miliseconds = new Date().getTime();
 	$("#bonus-input").val(thisIsTheActualBonusValue.toFixed(3));
 	$("#offset-input").val(miliseconds-gameStart);
 	$("#interaction-input").val(interaction);
@@ -76,25 +87,17 @@ function endGame(){
 }
 
 function callServer(_data){
+	var _copy = _data;
 	$.ajax({
 		url: "http://codingthecrowd.com/counter.php",
-		//url: "http://utakutik.us/crowdprogramming/crowdcounter.php",
 		dataType: "jsonp",
 		data: {
-			key: "garfield",
+			key: "garfield"+mode,
 			data: JSON.stringify(_data)
 		},
 		success: function( response ) {
-			var count = parseInt(response["count"]);
 			var result = response["results"];
-			var total = 0;
-			var allAlive = true;
-			for(var i = 0; i < result.length; i++){
-				total += parseInt(JSON.parse(result[i]["data"]).ship);
-				if(mode == 0)
-					allAlive = allAlive && JSON.parse(result[i]["data"]).alive;
-			}
-			idle++;
+			var allAlive = isAlive;
 			
 			if(offset != parseInt(response["time"]%board.length)){
 				offset = parseInt(response["time"])%board.length;
@@ -106,11 +109,16 @@ function callServer(_data){
 				drawRow(nextRow);
 			}
 			
-			position = Math.floor(total/count) * 100;
-			$("#player").css("left",position);
+			position = getMediator(result);
+			if(_copy.ship == position) reputation++;
+			$("#player").css("left",position * 100);
+			for(var i = 0; i < result.length; i++){
+				if(mode == 0)
+					allAlive = allAlive && JSON.parse(result[i]["data"]).alive;
+			}
 			if(allAlive){
 				var position = parseInt($("#highlighter").css("left"))/100;
-				var _data = {ship:position,alive:isAlive,idle:idle,interaction:interaction};
+				var _data = {ship:position,alive:isAlive,idle:idle,interaction:interaction,reputation:reputation};
 				callServer(_data);
 			}
 			else{
@@ -119,6 +127,42 @@ function callServer(_data){
 			}
 		}
 	})
+}
+
+function gup( name, url ) {
+  if (!url) url = location.href;
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( url );
+  return results == null ? null : results[1];
+}
+var mediator = gup('mediator',document.location);
+if (mediator == null) mediator = "average";
+
+function getMediator(result){
+	var total = 0;
+	var count = 0;
+	if(mediator == "average"){
+		for(var i = 0; i < result.length; i++){
+			total += parseInt(JSON.parse(result[i]["data"]).ship);
+			count++;
+		}
+	}
+	else{
+		for(var i = 0; i < result.length; i++){
+			var current = JSON.parse(result[i]["data"]);
+			if (parseInt(current.idle) <= 5){
+				total += parseInt(current.ship) * (Math.floor(parseInt(current.reputation)/10)+1);
+				count += (Math.floor(parseInt(current.reputation)/10))+1;
+			}
+			else if (result.length == 1){
+				count++;
+				total += parseInt(JSON.parse(result[i]["data"]).ship);
+			}
+		}
+	}
+	return Math.floor(total/count);
 }
 
 var gameInterval = setInterval(function(){
@@ -142,6 +186,7 @@ var gameInterval = setInterval(function(){
 			}
 		}
 		$(".bonus").text(bonus.toFixed(3));
+		idle++;
 	}
 },1000)
 
@@ -187,7 +232,7 @@ $(".mode-btn").click(function(){
 })
 $(".start-btn").click(function(){
 	if($(this).hasClass("disabled")) return;
-	_data = {ship:2,alive:true,idle:idle,interaction:interaction};
+	_data = {ship:2,alive:true,idle:idle,interaction:interaction,reputation:reputation};
 	$.ajax({
 		url: "http://codingthecrowd.com/counter.php",
 		//url: "http://utakutik.us/crowdprogramming/crowdcounter.php",
@@ -211,20 +256,15 @@ $(".start-btn").click(function(){
 			}
 			
 			//set player/highlighter position
-			var count = parseInt(response["count"]);
-			var total = 0;
 			var result = response["results"];
-			for(var i = 0; i < result.length; i++){
-				total += parseInt(JSON.parse(result[i]["data"]).ship);
-			}
-			position = Math.floor(total/count) * 100;
+			position = getMediator(result) * 100;
 			$("#player,#highlighter").css("left",position);
 			
 			//fade the board in
 			$("#game").fadeIn(400,function(){
 				isAlive = true;
 				position = parseInt($("#highlighter").css("left"))/100;
-				_data = {ship:position,alive:isAlive,idle:idle,interaction:interaction};
+				_data = {ship:position,alive:isAlive,idle:idle,interaction:interaction,reputation:reputation};
 				callServer(_data);
 			});
 		}
