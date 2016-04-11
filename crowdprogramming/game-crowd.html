@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Play the Game, Crowd!</title>
+		<link href='https://fonts.googleapis.com/css?family=McLaren|Luckiest+Guy|Bangers' rel='stylesheet' type='text/css'>
+		<link href='style.css' rel='stylesheet' type='text/css'>
+		<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+	</head>
+	<body>
+		<h1>crowdplaying</h1>
+		<div class="page" id="intro">
+			<h2>Instruction</h2>
+			<p class="monster">You will be playing a game as a monster chasing kids. Your goal is to catch as many kids as possible. You can only catch a kid coming from the top (you can't catch a kid from the right/left). For every kid you catch, you will get $0.001 bonus. You can only move sideways in the game. Use the right and left arrows on your keyboard to move your character. The game ends when you collect a total of $1.00 bonus. You can also leave the game any time by clicking the quit button.</p>
+			<p class="kid">You will be playing a game as a kid avoiding monsters. Move your character left and right using the arrow keyboards to avoid incoming monsters. For every second you manage to avoid monsters, you will get $0.001 bonus. The game ends when you either collect a total of $2.00 bonus, or get caught by a monster. You can also leave the game any time by clicking the quit button.</p>
+			<h2>Choose Your Character</h2>
+			<ul class="characters kid">
+				<li class="char-1 selected"></li>
+				<li class="char-2"></li>
+				<li class="char-3"></li>
+				<li class="char-4"></li>
+			</ul>
+			<p><b>IMPORTANT!</b> Accept the HIT before starting your game.</p>
+			<p style="margin-bottom:0;text-align:center;"><button class="button orange-btn mode-btn">Change Mode</button><button class="button green-btn start-btn" data-target="game">Begin</button></p>
+		</div>
+		<div class="page" id="game">
+			<div class="board monster">
+				<div id="highlighter"></div>
+				<div id="player"></div>
+			</div>
+			<div class="score">
+				<p>Your Bonus:</p>
+				<div class="bonus">0.000</div>
+				<div class="button orange-btn quit-btn">Quit</div>
+			</div>
+		</div>
+		<div class="page" id="quit">
+			<h2>Game Over!</h2>
+			<div class="exit-statement">Thank you for playing! Your final earning is <span class="bonus"></span> bonus in addition to your $0.25 payment.</div>
+		</div>
+		<div class="page">
+			<form id="mturk_form">
+				<input type="hidden" id="bonus-input" name="bonus" />
+				<input type="hidden" id="offset-input" name="gametime" />
+				<input type="hidden" id="idle-input" name="idle" />
+				<input type="hidden" id="interaction-input" name="interaction" />
+				<input type="hidden" id="same-input" name="same" />
+			</form>
+		</div>
+		<p class="credits"><a href='http://www.freepik.com/free-vector/young-people-avatars_764471.htm'>Kids</a> and <a href='www.freepik.com/free-vector/funny-monsters-avatars_764473.htm'>Monsters</a> avatars from Freepik</p>
+		<script type="text/javascript" src="mturk.js"></script>
+		<script type="text/javascript" src="game-crowd.js"></script>
+	</body>
+</html>
