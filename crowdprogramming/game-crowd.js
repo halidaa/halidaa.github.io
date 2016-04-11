@@ -89,8 +89,10 @@ function callServer(_data){
 			var count = parseInt(response["count"]);
 			var result = response["results"];
 			var total = 0;
+			var allAlive = true;
 			for(var i = 0; i < result.length; i++){
 				total += parseInt(JSON.parse(result[i]["data"]).ship);
+				allAlive = allAlive && JSON.parse(result[i]["data"]).alive;
 			}
 			idle++;
 			
@@ -106,10 +108,13 @@ function callServer(_data){
 			
 			position = Math.floor(total/count) * 100;
 			$("#player").css("left",position);
-			if(isAlive){
+			if(allAlive){
 				var position = parseInt($("#highlighter").css("left"))/100;
 				var _data = {ship:position,alive:isAlive,idle:idle,interaction:interaction};
 				callServer(_data);
+			}
+			else{
+				endGame();
 			}
 		}
 	})
@@ -186,7 +191,7 @@ $(".start-btn").click(function(){
 		//url: "http://utakutik.us/crowdprogramming/crowdcounter.php",
 		dataType: "jsonp",
 		data: {
-			key: "garfield",
+			key: "garfield"+mode,
 			data: JSON.stringify(_data)
 		},
 		success: function( response ) {
@@ -201,7 +206,6 @@ $(".start-btn").click(function(){
 				if (nextIdx > (board.length - 1)) nextIdx = 0;
 				nextRow = board[nextIdx];
 				drawRow(nextRow);
-				//drawRow(board[i]);
 			}
 			
 			//set player/highlighter position
