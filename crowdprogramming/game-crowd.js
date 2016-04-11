@@ -62,7 +62,6 @@ function eatKid(){
 }
 
 function endGame(){
-	isAlive = false;
 	$("#bonus-input").val(thisIsTheActualBonusValue.toFixed(3));
 	$("#offset-input").val(miliseconds-gameStart);
 	$("#interaction-input").val(interaction);
@@ -92,7 +91,8 @@ function callServer(_data){
 			var allAlive = true;
 			for(var i = 0; i < result.length; i++){
 				total += parseInt(JSON.parse(result[i]["data"]).ship);
-				allAlive = allAlive && JSON.parse(result[i]["data"]).alive;
+				if(mode == 0)
+					allAlive = allAlive && JSON.parse(result[i]["data"]).alive;
 			}
 			idle++;
 			
@@ -114,6 +114,7 @@ function callServer(_data){
 				callServer(_data);
 			}
 			else{
+				isAlive = false;
 				endGame();
 			}
 		}
@@ -124,6 +125,7 @@ var gameInterval = setInterval(function(){
 	if (isAlive){			
 		if (mode == 0){
 			if (checkCollide()){
+				isAlive = false;
 				endGame();
 			}
 			else{
