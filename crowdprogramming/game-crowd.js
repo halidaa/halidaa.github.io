@@ -130,7 +130,7 @@ function callServer(_data){
 }
 
 var mediator = gup('mediator');
-if (mediator == null) mediator = "average";
+if (mediator == "") mediator = "average";
 
 function getMediator(result){
 	var total = 0;
