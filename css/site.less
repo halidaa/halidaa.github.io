@@ -185,17 +185,31 @@ section{
 	bottom:0;
 	left:0;
 
-	opacity:0;
+	z-index:111;
+
+	display:none;
 
 	.image{
 		display:block;
 		margin:auto;
-		max-width:80%;
+		max-width:90%;
 		position:absolute;
 		top:0;
 		right:0;
 		bottom:0;
 		left:0;
+		text-align:center;
+	}
+
+	.close{
+		color:@WHITE;
+		font-size:1.5em;
+		position:absolute;
+		right:@GAP;
+		top:@GAP;
+		&:hover{
+			cursor:pointer;
+		}
 	}
 }
 

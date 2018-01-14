@@ -45,6 +45,22 @@ $(document).ready(function() {
 	$("#back-to-top").click(function(){
 		gotoAnchor("top");
 	})
+
+	$(".project-list img").click(function(){
+		var img = $(this);
+		$("#zoom img").attr("src",img.attr("src"));
+		$("#zoom img").attr("alt",img.attr("alt"));
+		$("#zoom").fadeIn();
+	})
+
+	$("#zoom").click(function(){
+		$(this).fadeOut();
+	})
+
+	$("#zoom img").click(function(e){
+		e.stopPropagation();
+		e.preventDefault();
+	})
 });
 
 $(window).scroll(function(){
