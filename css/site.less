@@ -188,6 +188,28 @@ section{
 	max-width:500px;
 }
 
+#zoom{
+	background:fade(@TEXT,50%);
+	position:fixed;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+
+	opacity:0;
+
+	.image{
+		display:block;
+		margin:auto;
+		max-width:80%;
+		position:absolute;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+	}
+}
+
 .about-list{
 	list-style:none;
 	margin:0 0 @GAP*2;
@@ -238,9 +260,16 @@ section{
 		figure{
 			float:none;
 			padding:0;
-			margin:0;
+			margin:0 auto;
 			margin-bottom:@GAP*2;
+			max-width:200px;
+			img:hover{
+				cursor:zoom-in;
+			}
 		}
+	}
+	&.wide >li figure{
+		max-width:none;
 	}
 	.categories{
 		color:lighten(@TEXT,15%);
@@ -264,10 +293,11 @@ section{
 	p{
 		font-size:.95em;
 		margin-top:@GAP * -1;
-	}
-	a{
-		text-decoration:underline;
-		text-decoration-skip:ink;
+		a{
+			font-style:normal;
+			text-decoration:underline;
+			text-decoration-skip:ink;
+		}
 	}
 }
 
@@ -500,4 +530,12 @@ section{
 
 // xl
 @media (min-width: 1350px) {
+}
+
+//ipad pro
+@media (min-width:1350) and (min-height: 1000px){
+	#title-svg{
+		margin-top:300px;
+		max-width:650px;
+	}
 }
