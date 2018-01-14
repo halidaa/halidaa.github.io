@@ -6,19 +6,22 @@
 	box-sizing: border-box;
 }
 
-html,body{
-	background:@WHITE;
+html{
 	color:@TEXT;
-	font-family:@FONT;
 	font-weight:300;
 	line-height:1.75em;
 	overflow-x:hidden;
 }
 
+body{
+	background:@WHITE;
+	font-family:@FONT;
+}
+
 a{
 	.has-transition(.25s);
 	border-bottom:1px solid transparent;
-	color:@ACCENT1;
+	color:@ACCENT;
 	padding:1px 0;
 	text-decoration:none;
 
@@ -41,41 +44,40 @@ header{
 	img{
 		padding:@GAP 10%;
 		width:100%;
-		max-width:250px;
 	}
-	nav{
-		list-style:none;
-		margin:0 auto;
-		padding:0 @GAP;
-		a{
-			.has-transition(.5s);
-			border-bottom:1px solid transparent;
-			display:inline-block;
-			margin:0 @GAP/2;
+}
+nav{
+	list-style:none;
+	margin:0 auto;
+	padding:0 @GAP;
+	a{
+		.has-transition(.5s);
+		border-bottom:1px solid transparent;
+		display:inline-block;
+		margin:0 @GAP/2;
+		color:@TEXT;
+		padding:@GAP/2;
+		position:relative;
+		&:hover,&:focus,&:active{
+			text-decoration:none;
+			border-bottom:@ACCENT;
+		}
+		&:visited{
 			color:@TEXT;
-			padding:@GAP/2;
-			position:relative;
-			&:hover,&:focus,&:active{
-				text-decoration:none;
-				border-bottom:@ACCENT1;
-			}
-			&:visited{
-				color:@TEXT;
-			}
-			&.active{
-				border-bottom-color:@ACCENT1;
-			}
+		}
+		&.active{
+			border-bottom-color:@ACCENT;
 		}
 	}
 }
 
 figure{
 	margin:@GAP 0 @GAP * 2;
-	figcaption{
-		font-size:.9em;
-		font-style:italic;
-		line-height:1.25em;
-	}
+}
+figcaption{
+	font-size:.9em;
+	font-style:italic;
+	line-height:1.25em;
 }
 
 footer{
@@ -93,20 +95,20 @@ footer{
 		list-style:none;
 		margin:0 auto;
 		padding:0 @GAP;
-		li{
-			display:inline-block;
-			margin:5px @GAP/2;
-			font-size:1.1em;
-			a{
-				color:@TEXT;
-				padding:@GAP/2;
-				&:hover,&:focus{
-					color:@ACCENT;
-				}
-				&:focus{
-					border-bottom:1px solid @ACCENT1;
-				}
-			}
+	}
+	li{
+		display:inline-block;
+		margin:5px @GAP/2;
+		font-size:1.1em;
+	}
+	a{
+		color:@TEXT;
+		padding:@GAP/2;
+		&:hover,&:focus{
+			color:@ACCENT;
+		}
+		&:focus{
+			border-bottom:1px solid @ACCENT;
 		}
 	}
 }
@@ -162,24 +164,17 @@ section{
 
 	&.show{
 		opacity:.8;
-		&:hover,&:focus{
-			background:@ACCENT;
-			color:@WHITE;
-			cursor:pointer;
-			opacity:1;
-		}
-		&:focus{
-			outline-color:@ACCENT2;
-		}
 	}
-}
 
-#title-svg{
-	display:none;
-	fill:@ACCENT;
-	fill-opacity:0;
-	margin-bottom:2em;
-	max-width:500px;
+	&:hover,&:focus{
+		background:@ACCENT;
+		color:@WHITE;
+		cursor:pointer;
+		opacity:1;
+	}
+	&:focus{
+		outline-color:@ACCENT2;
+	}
 }
 
 #zoom{
@@ -244,27 +239,30 @@ section{
 		padding:@GAP;
 		vertical-align:top;
 		width:100%;
-		h3{
-			font-weight:bold;
-			height:35px;
-			margin-bottom:0;
-			text-align:center;
-			text-transform:uppercase;
-		}
-		figure{
-			float:none;
-			padding:0;
-			margin:0 auto;
-			margin-bottom:@GAP*2;
-			max-width:200px;
-			text-align:center;
-			img:hover{
-				cursor:zoom-in;
-			}
-		}
 	}
-	&.wide >li figure{
+	&.wide figure{
 		max-width:none;
+	}
+	h3{
+		font-weight:bold;
+		height:35px;
+		margin-bottom:0;
+		text-align:center;
+		text-transform:uppercase;
+	}
+	figure{
+		float:none;
+		padding:0;
+		margin:0 auto;
+		margin-bottom:@GAP*2;
+		max-width:200px;
+		text-align:center;
+	}
+	img{
+		max-width:100%;
+		&:hover{
+			cursor:zoom-in;
+		}
 	}
 	.categories{
 		color:lighten(@TEXT,15%);
@@ -288,11 +286,11 @@ section{
 	p{
 		font-size:.95em;
 		margin-top:@GAP * -1;
-		a{
-			font-style:normal;
-			text-decoration:underline;
-			text-decoration-skip:ink;
-		}
+	}
+	a{
+		font-style:normal;
+		text-decoration:underline;
+		text-decoration-skip:ink;
 	}
 }
 
@@ -326,18 +324,5 @@ section{
 	margin-top:@GAP * -2;
 	.accent{
 		color:@ACCENT;
-	}
-}
-
-.showcase{
-	.clearfix();
-	list-style:none;
-	margin:@GAP auto;
-	padding:0;
-	text-align:center;
-	li{
-		display:inline-block;
-		margin:@GAP;
-		max-width:300px;
 	}
 }
