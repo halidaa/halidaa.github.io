@@ -1,0 +1,36 @@
+@import "variables.less";
+
+// sm
+@media (min-width: 768px) {
+	body{
+		padding-top:@GAP * 14;
+	}
+	header{
+		background:@WHITE;
+		box-shadow:0 0 1px fade(@ACCENT, 60%);
+		position:fixed;
+		top:0;
+		left:0;
+		right:0;
+		img{
+			max-width:325px;
+		}
+	}
+	figure{
+		float:right;
+		margin-top:0;
+		margin-left:@GAP * 3;
+		text-align:right;
+		figcaption{
+			margin-left:25px;
+			width:225px;
+		}
+	}
+	.project-list{
+		margin-left:@GAP*-1;
+		> li{
+			margin:@GAP;
+			width:45%;
+		}
+	}
+}
