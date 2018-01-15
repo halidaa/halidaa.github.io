@@ -26,9 +26,13 @@ window.addEventListener('load', function(){
 		if($(this).attr("data-src")){
 			var _src = $(this).data("src");
 			$(this).attr("src", _src);
-			if($(this).parents("wide").length > 0)
-				$(this).attr("width", "500px");
+			if($(this).data("width"))
+				$(this).attr("width", $(this).data("width"));
+			if($(this).data("height"))
+				$(this).attr("height", $(this).data("height"));
 			$(this).removeAttr("data-src");
+			$(this).removeAttr("data-width");
+			$(this).removeAttr("data-height");
 		}
 	})
 })
