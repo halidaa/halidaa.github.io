@@ -1,8 +1,5 @@
-@import "variables.less";
-
-.has-transition(@DURATION){
-	transition:all @DURATION ease-in-out;
-}
+@import "site.less";
+@import "site-sm.less";
 
 // md
 @media (min-width: 992px) {
@@ -10,7 +7,6 @@
 		padding-top:0;
 	}
 	header,footer{
-		.has-transition(.25s);
 		position:fixed;
 		top:0;
 		bottom:0;
@@ -104,6 +100,10 @@
 			padding-bottom:0;
 		}
 	}
+	#container{
+		margin-left:22.5%;
+		width:70%;
+	}
 	#title-svg{
 		.has-transition(.5s);
 		display:block!important;
@@ -129,8 +129,9 @@
 		font-size:1.75em;
 		margin-top:0;
 	}
-	#container{
-		margin-left:22.5%;
-		width:70%;
+	.project-list{
+		p{
+			font-size:.95em;
+		}
 	}
 }

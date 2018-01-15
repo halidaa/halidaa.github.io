@@ -1,6 +1,16 @@
-@import "utilities.less";
 @import "normalize.less";
 @import "variables.less";
+
+.clearfix{
+	&:after{
+		content:"";
+		clear:both;
+		display:table;
+	}
+}
+.has-transition(@DURATION){
+	transition:all @DURATION ease-in-out;
+}
 
 *{
 	box-sizing: border-box;
