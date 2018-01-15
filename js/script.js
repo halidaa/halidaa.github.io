@@ -19,19 +19,22 @@ function gotoAnchor(id){
 	$('html,body').animate({scrollTop:x},'slow');
 }
 
-window.onbeforeunload=function(){window.scrollTo(0, 0);}
+window.onbeforeunload=function(){$("body").css("opacity",0);window.scrollTo(0, 0);}
 
 window.addEventListener('load', function(){
 	$("img").each(function(){
 		if($(this).attr("data-src")){
 			var _src = $(this).data("src");
 			$(this).attr("src", _src);
+			if($(this).parents("wide").length > 0)
+				$(this).attr("width", "500px");
 			$(this).removeAttr("data-src");
 		}
 	})
 })
 
 $(document).ready(function() {
+	$("html").css("opacity",1);
 	if(window.innerWidth >= 992){
 		$("#title-svg").css({"stroke":"#ff6200"});
 		new Vivus('title-svg', {duration: 150}, function(){
