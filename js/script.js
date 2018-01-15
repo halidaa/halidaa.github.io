@@ -15,7 +15,7 @@ function gotoAnchor(id){
 	if(id == "top")
 		x = 0;
 	else
-		x = $(id).offset().top;
+		x = $(id).offset().top - 30;
 	$('html,body').animate({scrollTop:x},'slow');
 }
 
@@ -35,6 +35,14 @@ window.addEventListener('load', function(){
 			$(this).removeAttr("data-height");
 		}
 	})
+
+	if(!$){
+		document.getElementById("title-svg").classList.add("shown");
+		document.getElementsByTagName("header").classList.add("shown");
+		document.getElementsByTagName("footer").classList.add("shown");
+		document.getElementsByTagName("section").classList.add("shown");
+		document.getElementsByClassName("subheading").classList.add("shown");
+	}
 })
 
 $(document).ready(function() {
