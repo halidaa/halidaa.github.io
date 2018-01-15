@@ -1,5 +1,5 @@
 @import "utilities.less";
-@import "goldilocks.less";
+@import "normalize.less";
 @import "variables.less";
 
 *{
@@ -37,7 +37,8 @@ a{
 
 header{
 	font-family:@FONT;
-	padding:@GAP*3 @GAP @GAP;
+	margin-bottom:@GAP * 2;
+	padding:@GAP;
 	text-align:center;
 	text-transform:uppercase;
 	z-index:100;
@@ -49,7 +50,7 @@ header{
 nav{
 	list-style:none;
 	margin:0 auto;
-	padding:0 @GAP;
+	padding:0;
 	a{
 		.has-transition(.5s);
 		border-bottom:1px solid transparent;
@@ -86,6 +87,7 @@ footer{
 	z-index:101;
 	h2{
 		font-family:@FONT;
+		font-size:1.15em;
 		font-weight:300;
 		padding:0 @GAP;
 		margin:0 0 @GAP;
@@ -260,6 +262,7 @@ section{
 	h3{
 		font-weight:bold;
 		height:35px;
+		line-height:1em;
 		margin-bottom:0;
 		text-align:center;
 		text-transform:uppercase;
@@ -298,7 +301,6 @@ section{
 		}
 	}
 	p{
-		font-size:.95em;
 		margin-top:@GAP * -1;
 	}
 	a{
