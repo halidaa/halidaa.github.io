@@ -1,0 +1,53 @@
+@import "site.less";
+
+@media print {
+	header img, header nav{
+		display:none;
+	}
+
+	a{
+		text-decoration:none!important;
+		&:after{content:" (" attr(href) ") ";}
+	}
+
+
+	.project-list >li, footer li{
+		display:block!important;
+		max-width:500px!important;
+		width:100%!important;
+	}
+
+	.project-list img{
+		margin:0!important;
+		max-height:200px;
+	}
+
+	.project-list h3, .categories, figure{
+		height:auto!important;
+		margin:0!important;
+		text-align:left!important;
+	}
+
+	#about figure, .categories{
+		margin-bottom:@GAP * 2!important;
+	}
+
+	.categories{
+		position:static!important;
+	}
+
+	footer{
+		text-align:left!important;
+		li{
+			margin:0!important;
+			margin-bottom:@GAP!important;
+		}
+	}
+
+	section{
+		page-break-after: always;
+		&:first-child,&:last-child{
+			page-break-after:auto;
+		}
+	}
+}
