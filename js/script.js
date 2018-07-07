@@ -1,3 +1,5 @@
+var lastFocus = $("body");
+
 $.fn.isInViewport = function(byOffset) {
 	var elementTop = $(this).offset().top + byOffset;
 	var elementBottom = elementTop + $(this).outerHeight();
@@ -6,16 +8,20 @@ $.fn.isInViewport = function(byOffset) {
 	return elementBottom > viewportTop && elementTop < viewportBottom;
 };
 
-function debugLayout(){
-    [].forEach.call($$("*"),function(a){a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16)});
-}
+// function debugLayout(){
+//     [].forEach.call($$("*"),function(a){a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16)});
+// }
 
 function gotoAnchor(id){
 	var x;
-	if(id == "top")
+	if(id == "top"){
 		x = 0;
-	else
+		$("nav a:first-child").focus();
+	}
+	else{
 		x = $(id).offset().top - 30;
+		$(id+" img").eq(0).focus();
+	}
 	$('html,body').animate({scrollTop:x},'slow');
 }
 
@@ -77,15 +83,36 @@ $(document).ready(function() {
 		$("#zoom img").attr("alt",img.attr("alt"));
 		$("#zoom").fadeIn();
 	})
+	$(".project-list img").keydown(function(e){
+	    if(e.which === 13){
+			var img = $(this);
+			lastFocus = img;
+			$("#zoom img").attr("src",img.attr("src"));
+			$("#zoom img").attr("alt",img.attr("alt"));
+			$("#zoom").fadeIn().focus();
+	    }
+	});
 
 	$("#zoom").click(function(){
 		$(this).fadeOut();
+	})
+	$("#zoom").keydown(function(e){
+	    if(e.which === 13){
+			$("#zoom").fadeOut();
+			lastFocus.focus();
+	    }
 	})
 
 	$("#zoom img").click(function(e){
 		e.stopPropagation();
 		e.preventDefault();
 	})
+	$(document).keyup(function(e){
+	    if(e.keyCode === 27){
+	        $("#zoom").fadeOut();
+			lastFocus.focus();	
+	    }
+	});
 });
 
 $(window).scroll(function(){
@@ -102,6 +129,10 @@ $(window).scroll(function(){
 	if($("#about").isInViewport(window.innerHeight/2)){
 		$("nav a").blur().removeClass("active");
 		$("nav a[href='#about']").addClass("active");
+	}
+	else if($("#features").isInViewport(window.innerHeight/2)){
+		$("nav a").blur().removeClass("active");
+		$("nav a[href='#features']").addClass("active");
 	}
 	else if($("#projects").isInViewport(window.innerHeight/2)){
 		$("nav a").blur().removeClass("active");
