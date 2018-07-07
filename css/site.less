@@ -14,6 +14,7 @@
 
 *{
 	box-sizing: border-box;
+	outline-color:@ACCENT2;
 }
 
 html{
@@ -65,7 +66,7 @@ nav{
 		.has-transition(.5s);
 		border-bottom:1px solid transparent;
 		display:inline-block;
-		margin:0 @GAP/2;
+		margin:0;
 		color:@TEXT;
 		padding:@GAP/2;
 		position:relative;
@@ -78,6 +79,9 @@ nav{
 		}
 		&.active{
 			border-bottom-color:@ACCENT;
+		}
+		&:nth-child(2){
+			display:none;
 		}
 	}
 }
@@ -286,9 +290,14 @@ section{
 		text-align:center;
 	}
 	img{
+		border:1px solid transparent;
 		max-width:100%;
 		&:hover{
 			cursor:zoom-in;
+		}
+		&:focus{
+			border:1px solid @ACCENT2;
+			border-radius:3px;
 		}
 	}
 	.categories{
