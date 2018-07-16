@@ -14,15 +14,18 @@ $.fn.isInViewport = function(byOffset) {
 
 function gotoAnchor(id){
 	var x;
+	var forceFocus;
 	if(id == "top"){
 		x = 0;
-		$("nav a:first-child").focus();
+		forceFocus = $("nav a:first-child");
 	}
 	else{
 		x = $(id).offset().top - 30;
-		$(id+" img").eq(0).focus();
+		forceFocus = $(id+" a").eq(0);
 	}
-	$('html,body').animate({scrollTop:x},'slow');
+	$('html,body').animate({scrollTop:x},'slow',function(){
+		forceFocus.focus()
+	});
 }
 
 window.onbeforeunload=function(){$("body").css("opacity",0);window.scrollTo(0, 0);}
