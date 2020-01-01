@@ -69,6 +69,7 @@ $(document).ready(function() {
 	}
 
 	$("header nav a").click(function(e){
+		if($(this).hasClass("linked")) return;
 		e.preventDefault();
 		var target = $(this).attr("href");
 		$("nav a").blur().removeClass("active");
