@@ -288,7 +288,7 @@ nav a:visited {
 nav a.active {
   border-bottom-color: #ff6200;
 }
-nav a:nth-child(2) {
+nav a.mini-hide {
   display: none;
 }
 figure {
@@ -344,6 +344,35 @@ section:first-child {
   opacity: 1;
   padding-top: 15px;
 }
+section.blog {
+  max-width: 750px;
+}
+section.blog blockquote {
+  font-size: 1.5em;
+  line-height: 1.75em;
+  margin: 45px;
+  opacity: 0.8;
+}
+section.blog h1 + h4 {
+  font-style: italic;
+  font-weight: normal;
+  opacity: 0.8;
+  margin: 0 0 45px;
+}
+section.blog h3 {
+  margin-top: 45px;
+}
+section.blog h4 {
+  margin-top: 30px;
+  margin-bottom: -7.5px;
+}
+section.blog hr {
+  margin-top: 30px;
+  opacity: 0.8;
+}
+section.blog img {
+  max-width: 100%;
+}
 section h2,
 section.blog h1 {
   font-size: 1.5em;
@@ -361,9 +390,6 @@ section.blog h1:after {
   left: 0;
   bottom: -7.5px;
   width: 45px;
-}
-section img {
-  max-width: 100%;
 }
 #back-to-top {
   transition: all 0.5s ease-in-out;
@@ -463,6 +489,14 @@ section img {
   padding: 15px;
   vertical-align: top;
   width: 100%;
+}
+.project-list.post-list > li {
+  margin: 0;
+  max-width: 500px;
+  width: 100%;
+}
+.project-list.post-list .categories:before {
+  content: "Tagged: ";
 }
 .project-list.wide figure {
   max-width: none;
