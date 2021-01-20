@@ -1,0 +1,122 @@
+<html>
+	<head>
+		<title>N-Gram Preprocess Automate</title>
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+		<style>
+			body{
+				color:#393940;
+				font-family: 'Open Sans', sans-serif;
+				margin:0 auto;
+				padding:15px;
+				text-align: center;
+			}
+			h1{
+    			margin:15px auto;
+				max-width:1030px;
+				text-align:left;
+			}
+			textarea{
+				color:#393940;
+				display:block;
+				font-size:1em;
+				height:300px;
+				width:100%;
+			}
+			button{
+				background:#EA5164;
+				border:0;
+				border-radius:3px;
+				box-shadow:0;
+				color:white;
+				font-size:1em;
+				margin:15px 0;
+				outline:0;
+				padding:15px;
+			}
+			button:hover{
+				cursor:pointer;
+			}
+			form,#result{
+				display:inline-block;
+				margin:15px;
+				max-width:500px;
+				text-align:left;
+				vertical-align:top;
+				width:100%;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Automate N-Gram Preprocessing</h1>
+		<form>
+			<h2>Original Text</h2>
+			<textarea name="original" id="original"></textarea>
+			<button id="submit">Preprocess</button>
+		</form>
+		<div id="result">
+			<h2>Result</h2>
+			<textarea></textarea>
+		</div>
+	</body>
+	<script>
+		var rules = [
+			//remove punctuations and numbers
+			{rgx:/[^A-Za-z\n]/g,rpl:" "},
+			//separate "nya" from words
+			{rgx:/([a-z])(nya)\b|([a-z])(ny)\b/g,rpl:"$1 nya"},
+			//but get hanya, tanya, and punya back
+			{rgx:/(\bha\b|\bpu\b|\bta\b)( )(nya)/g,rpl:"$1nya"},
+			//remove common words
+			{rgx:/\bkrn\b|\bkrna\b|\bkerna\b|\bkarna\b/g,rpl:"karena"},
+			{rgx:/\btp\b|\btpi\b/g,rpl:"tapi"},
+			{rgx:/\bjd\b|\bjdi\b/g,rpl:"jadi"},
+			{rgx:/\butk\b|\btuk\b/g,rpl:"untuk"},
+			{rgx:/\blg\b|\blgi\b/g,rpl:"lagi"},
+			{rgx:/\bjg\b|\bjga\b/g,rpl:"juga"},
+			{rgx:/\bjk\b|\bjika\b|\bkl\b|\bklo\b|\bklu\b|\bkalo\b|\bkalu\b|\bklw\b/g,rpl:"kalau"},
+			{rgx:/\bnya\b|\bsaya\b|\bsy\b|\bsya\b|\bbukalapak\b|\bbuka lapak\b|\bbl\b|\byang\b|\byg\b|\byng\b|\bdan\b|\bd\b|\bdi\b|\bdr\b|\bdari\b|\bdri\b|\by\b|\bya\b|\bterima kasih\b|\bterimakasih\b|\bjuga\b|\blagi\b|\bkarena\b|\bagar\b|\bsupaya\b|\bspy\b|\bsoalnya\b|\btapi\b|\bkalau\b|\bdengan\b|\bjuga\b|\buntuk\b|\bsemoga\b|\bini\b|\bitu\b|\buntuk\b|\bjadi\b/g,rpl:""},
+			//remove repetitive characters
+			{rgx:/(\w)\1+/g,rpl:"$1"},
+			//change tab to spaces
+			{rgx:/\t/g,rpl:" "},
+			//remove repetitive spaces
+			{rgx:/ +/g,rpl:" "},
+			//remove repetitive new lines
+			{rgx:/\n /g,rpl:"\n"},
+			{rgx:/\n+/g,rpl:"\n"},
+			//handle common typos
+			/*{rgx:/\bdiscon\b|\bdiscoun\b|\bdiscount\b/g,rpl:"diskon"},*/
+			{rgx:/\bvocher\b|\bvocer\b|\bvouhcer\b|\bvoucer\b|\bvocher\b|\bpocer\b|\bvoucher\b/g,rpl:"voucher"},
+			{rgx:/\bdiscon\b|\bdiscoun\b|\bdiscount\b/g,rpl:"diskon"},
+			{rgx:/\bnda\b|\bndak\b|\bkaga\b|\bkagak\b|\btak\b|\bng\b|\bnga\b|\bngak\b|\bg\b|\bga\b|\bgak\b|\btdk\b/g,rpl:"tidak"},
+			{rgx:/\bama\b|\bsama\b|\bdngn\b|\bdgn\b|\bdg\b/g,rpl:"dengan"},
+			{rgx:/\bpake\b|\bpk\b|\bpke\b/g,rpl:"pakai"},
+			{rgx:/\bjng\b|\bjgn\b|\bjngn\b|\bjngan\b/g,rpl:"jangan"},
+			{rgx:/\bbrg\b|\bbrng\b/g,rpl:"barang"},
+			{rgx:/\blbh\b|\blbih\b/g,rpl:"lebih"},
+			{rgx:/\bbs\b|\bbsa\b/g,rpl:"bisa"},
+			{rgx:/\btokped\b|\btoped\b/g,rpl:"tokopedia"},
+			{rgx:/\bshope\b/g,rpl:"shopee"},
+			{rgx:/\bongkos kirim\b/g,rpl:"ongkir"},
+			{rgx:/\bfre ongkir\b|\bfreong\b/g,rpl:"gratis ongkir"},
+			{rgx:/\bbgt\b|\bbgts\b/g,rpl:"banget"},
+			{rgx:/\bckp\b|\bckup\b/g,rpl:"cukup"},
+			{rgx:/\bapk\b|\bapp\b/g,rpl:"aplikasi"}
+		];
+
+		function preprocess(){
+			var orig = $("#original").val().toLowerCase();
+			for (var i = 0; i < rules.length; i++){
+				var rule = rules[i];
+				orig = orig.replace(rule.rgx,rule.rpl);
+			}
+			$("#result textarea").val(orig);
+		}
+
+		$("#submit").click(function(e){
+			e.preventDefault();
+			preprocess();
+		})
+	</script>
+</html>
